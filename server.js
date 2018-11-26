@@ -76,16 +76,13 @@ function gateKeeper(req, res, next) {
   if (foundHeader !== undefined) {
     const parseString = queryString.parse(foundHeader);
     console.log(parseString); // this returns object: { pass: 'password', user: 'joeschmoe@business.com' }
-
-// Got stuck here trying different things until time ran out
- //   if (Object.keys(parseString).find()
     
-//     const found = USERS.find(function(parseString) {
-//       return found;
-//     });
-   
-    // const matchedUsers = USERS.find();
-    // console.log(matchedUsers);      
+    // attempt to find user inside array has same user & pass inside the pass string variable
+    // if we don't find a user, then move on
+    // if we do find a user set req.user to that value
+    req.user = USERS.find(user => {
+       return (user.userName === parseString.user && user.password === parseString.pass)   
+    }) 
     
   } else {  
   console.log('Please login with valid credentials');  
